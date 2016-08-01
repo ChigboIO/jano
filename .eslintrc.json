@@ -1,0 +1,16 @@
+{
+     "extends": "eslint-config-airbnb-es5",
+    "parserOptions": {
+        "ecmaVersion": 5,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true
+        }
+    },
+    "rules": {
+        "no-console": "off",
+        "strict": "off",
+        "no-underscore-dangle": "off",
+        "prefer-template": "off"
+    }
+}

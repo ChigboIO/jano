@@ -1,0 +1,32 @@
+{
+  "name": "jano",
+  "version": "1.0.0",
+  "description": "A nodejs/express based application starter kit; following rails application structure",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-echigbo/jano.git"
+  },
+  "keywords": [
+    "jano",
+    "express",
+    "starter"
+  ],
+  "author": "Emmanuel Chigbo <chigboemmanuel@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-echigbo/jano/issues"
+  },
+  "homepage": "https://github.com/andela-echigbo/jano#readme",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "echo 'Test ahs not been implemented'"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.2.0",
+    "eslint-config-airbnb-es5": "^1.0.9",
+    "eslint-plugin-react": "^5.2.2",
+    "mocha": "^2.5.3"
+  }
+}
