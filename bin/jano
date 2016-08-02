@@ -1,1 +1,133 @@
 #!/usr/bin/env node
+'use strict';
+
+require('colors');
+var path = require('path');
+var fs = require('fs-extra');
+var cp = require('child_process');
+var exec = cp.exec;
+var spawn = cp.spawn;
+
+var params = process.argv.slice(2);
+
+switch(params[0]) {
+  case 'new':
+    newApplication(params[1]);
+    break;
+  case 'help':
+  case '-h':
+  case '--help':
+    showHelp();
+    break;
+  default:
+    showHelp();
+}
+
+function newApplication(name) {
+
+  var projectName = name || 'jano-project';
+
+  if (checkFolderExists(projectName)) return;
+
+  createProject(projectName);
+}
+
+function checkFolderExists(folderName) {
+  var check = null;
+
+  try {
+    var stats = fs.lstatSync(path.resolve(folderName));
+    if (stats.isDirectory()) {
+      console.log('The directory `' + folderName + '` already exist in the location. Use a different one.');
+      check = true;
+    }
+  }
+  catch (e) {
+    check = null;
+  }
+  return check;
+}
+
+function createProject(projectName) {
+
+  fs.copy(path.resolve(__dirname, '..', 'template'), path.resolve(projectName), function (err) {
+    if (err) return console.error(err);
+
+    console.log('Generating project folders and files...', '');
+
+    const walker = fs.walk(path.resolve(projectName));
+
+    walker.on('data', function (item) {
+      console.log('Create:: '.bold.green + projectName.bold + '/' +
+        path.relative(path.resolve(projectName), item.path));
+    });
+
+    walker.on('end', function () {
+      console.log('...Done generating project folders', '');
+      runNpmInstall(projectName);
+    });
+  });
+}
+
+function runNpmInstall(projectName) {
+  console.log('Running `npm install`...');
+
+  npm = spawn('npm', ['install'], { cwd: path.resolve(projectName) });
+
+  npm.stdout.on('data', function(data) {
+    console.log(data.toString());
+  });
+
+  // npm.stderr.on('data', function(data) {
+  //   console.log('<<ERROR>> ', data.toString());
+  // });
+
+  npm.on('close', function(code) {
+    console.log('...done installing application dependencies');
+    installSequelizeCli(projectName);
+  });
+}
+
+function installSequelizeCli(projectName) {
+  console.log('Installing `sequelize-cli`...');
+
+  exec('npm install sequelize-cli -g', function (err, stderr, stdout) {
+    if (err) return console.error(err);
+
+    // console.log(stdout);
+    // console.log(stderr);
+    console.log('...done installing sequelize-cli. Now you can run the `sequelize` commands');
+
+    initializeGit(projectName);
+  });
+}
+
+function initializeGit(projectName) {
+  console.log('Initializing git...');
+  exec('git init', { cwd: path.resolve(projectName) }, function (err, stderr, stdout) {
+    if (err) return console.error(err);
+
+    console.log(stdout);
+    console.log(stderr);
+    console.log('...done initialize git in your project.');
+    printSummaryMessage(projectName);
+  });
+}
+
+function printSummaryMessage(projectName) {
+  console.log('');
+  console.log('');
+  console.log(`Next..., \`cd ${projectName}\``);
+  console.log('Run `sequelize help` to see available commands you can run for your models and migrations. Visit `http://docs.sequelizejs.com/en/latest/` for more details.');
+  console.log('');
+  console.log('To start application with gulp...: `gulp`');
+  console.log('To run tests...: `npm run test`');
+  console.log('To check style linting...: `npm run lint`');
+}
+
+function showHelp() {
+  console.log(
+    'Use `jano new [<project-name>]` to create a new project. \n' +
+    'NOTE: If you omit the <project-name>, "jano-project" will be used.'
+  );
+}
