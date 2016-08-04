@@ -1,16 +1,13 @@
 {
-     "extends": "eslint-config-airbnb-es5",
+    "extends": "airbnb-base/legacy",
     "parserOptions": {
-        "ecmaVersion": 5,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "modules": true
-        }
+        "ecmaVersion": 6,
+        "sourceType": "script"
     },
     "rules": {
         "no-console": "off",
         "strict": "off",
         "no-underscore-dangle": "off",
-        "prefer-template": "off"
+        "no-use-before-define": "off"
     }
 }
