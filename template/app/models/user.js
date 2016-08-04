@@ -1,4 +1,6 @@
-import Model from './baseModel';
+'use strict';
+
+const Model = require('./baseModel');
 
 class User extends Model.user {
   whoAmI() {
@@ -6,4 +8,4 @@ class User extends Model.user {
   }
 }
 
-export default User;
+module.exports = User;

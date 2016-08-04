@@ -1,10 +1,12 @@
-import express from 'express';
-import path from 'path';
-import logger from 'morgan';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
+'use strict';
 
-import errorHandler from './config/error-handler';
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+
+const errorHandler = require('./config/error-handler');
 
 const app = express();
 
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-import routes from './config/routes';
+const routes = require('./config/routes');
 app.use('/', routes);
 
 errorHandler(app);

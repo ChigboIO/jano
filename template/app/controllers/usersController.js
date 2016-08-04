@@ -1,5 +1,7 @@
-import ApplicationController from './applicationController';
-import User from '../models/user.js';
+'use strict';
+
+const ApplicationController = require('./applicationController');
+const User = require('../models/user.js');
 
 class UsersController extends ApplicationController {
   constructor() {
@@ -40,6 +42,7 @@ class UsersController extends ApplicationController {
       .then(user => {
         if (!user) {
           res.status(404).json('User Not Found');
+          return;
         }
         res.json(user);
       })
@@ -57,7 +60,7 @@ class UsersController extends ApplicationController {
       res.json(`User '${user.name}' has been deleted`);
     })
     .catch(err => {
-      res.json(`::Error:: Seems user with id '${id}' does not exist. ${err}`);
+      res.status(501).json(`::Error:: Seems user with id '${id}' does not exist. ${err}`);
     });
   }
 
@@ -66,4 +69,4 @@ class UsersController extends ApplicationController {
   }
 }
 
-export default UsersController;
+module.exports = UsersController;

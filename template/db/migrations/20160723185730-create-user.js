@@ -8,31 +8,31 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       age: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       sex: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     }, {
       // paranoid: true,
-      underscored: true,
+      underscored: true
     });
   },
   down: function (queryInterface, Sequelize) {
     return queryInterface.dropTable('users');
-  },
+  }
 };

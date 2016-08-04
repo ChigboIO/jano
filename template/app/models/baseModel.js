@@ -1,9 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-import Sequelize from 'sequelize';
+'use strict';
 
-import sequelize from '../../config/connection';
-import Schema from '../../db/schema';
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+
+const sequelize = require('../../config/connection');
+const Schema = require('../../db/schema');
 
 const basename = path.basename(module.filename);
 const Model = {};

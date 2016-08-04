@@ -1,16 +1,13 @@
 {
-    "extends": "airbnb",
+    "extends": "airbnb-base/legacy",
     "parserOptions": {
         "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "modules": true
-        }
+        "sourceType": "script"
     },
     "rules": {
         "no-console": "off",
         "strict": "off",
-        "no-underscore-dangle": "off"
-    },
-    "parser": "babel-eslint"
+        "no-underscore-dangle": "off",
+        "no-use-before-define": "off"
+    }
 }

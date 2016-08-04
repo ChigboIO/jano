@@ -1,13 +1,14 @@
 /* eslint-disable new-cap */
+'use strict';
 
-import express from 'express';
+const express = require('express');
 const router = express.Router();
 
-import HomeController from '../app/controllers/homeController';
-import UsersController from '../app/controllers/usersController';
+const HomeController = require('../app/controllers/homeController');
+const UsersController = require('../app/controllers/usersController');
 
-const home = new HomeController;
-const users = new UsersController;
+const home = new HomeController();
+const users = new UsersController();
 
 router.get('/', home.index);
 router.get('/users', users.index);
