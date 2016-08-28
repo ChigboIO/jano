@@ -9,5 +9,15 @@
         "strict": "off",
         "no-underscore-dangle": "off",
         "no-use-before-define": "off"
+    },
+    "globals": {
+      "process": 0,
+      "__dirname": 0,
+      "it": 0,
+      "describe": 0,
+      "beforeEach": 0,
+      "before": 0,
+      "after": 0,
+      "afterEach": 0
     }
 }

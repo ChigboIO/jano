@@ -2,6 +2,7 @@
 'use strict';
 
 const NewApplication = require('../lib/newApplication');
+const Server = require('../lib/server');
 const Helper = require('../lib/helper');
 const app = new NewApplication();
 
@@ -13,6 +14,11 @@ function main(params) {
   switch (params.shift()) {
     case 'new':
       app.setUp(params);
+      break;
+    case 'server':
+    case 'start':
+    case 's':
+      Server.start();
       break;
     case 'help':
     case '-h':
