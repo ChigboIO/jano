@@ -16,12 +16,15 @@ fs
   .forEach(file => {
     const modelName = file.split('.')[0];
     /* eslint-disable no-unused-vars */
-    const model = sequelize.import(modelName, (seq, Types) => seq.define(modelName, Schema.user));
+    const model = sequelize.import(modelName, (seq, Types) => {
+      return seq.define(modelName, Schema[modelName]);
+    });
     /* eslint-enable no=unused-vars */
-    Model[model.name] = model;
+    Model[modelName] = model;
   });
 
 Model[sequelize] = sequelize;
 Model[Sequelize] = Sequelize;
 
 module.exports = Model;
+
